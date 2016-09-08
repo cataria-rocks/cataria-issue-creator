@@ -1,6 +1,12 @@
-var express = require('express'),
+var ghGot = require('gh-got'),
+
+    express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
+
+    env = process.env,
+    endpoint = env.GITHUB_API_URL || 'https://api.github.com/';
+
     db = require('./db'),
     repos = Object.keys(db);
 
@@ -13,6 +19,7 @@ app
             repository = data.repository,
             repoUrl = repository.url,
             repo = db[repoUrl];
+            // [owner, repoName] = repository.full_name.split('/');
 
         if (!repo) return;
 
@@ -24,7 +31,22 @@ app
 
         data.commits.forEach(function(commit) {
             commit.modified.forEach(function(file) {
-                filesToWatch.includes(file) && console.log(file, 'was updated');
+                if (!filesToWatch.includes(file)) return;
+
+                console.log(file, 'was updated');
+
+                // NOTE: it uses process.env.GITHUB_TOKEN as token
+                ghGot('repos/' + repository.full_name + '/issues',
+                    {
+                        endpoint,
+                        body: {
+                            title: 'Update document translation',
+                            body: 'File ' + file + ' was changed.'
+                        }
+                    }).then(response => {
+                        console.log(response.body.login);
+                        //=> 'sindresorhus'
+                    }).catch(console.error);
             });
         });
     })
