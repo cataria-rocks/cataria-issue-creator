@@ -1,20 +1,22 @@
 {
-  "name": "ghping",
+  "name": "cataria-issue-creater",
   "version": "1.0.0",
-  "description": "",
+  "description": "Service to automatically create issues for translaters when a doc on a source language was updated in github repo.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tadatuta/cataria-issue-creater.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["cataria", "translation"],
+  "author": "Vladimir Grinenko <i@tadatuta.com>",
+  "license": "MPL-2.0",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "gh-got": "^5.0.0",
-    "install": "^0.8.1",
-    "npm": "^3.10.6",
     "parse-github-url": "^0.3.2"
   }
 }
