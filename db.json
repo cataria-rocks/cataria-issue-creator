@@ -1,10 +1,19 @@
 {
     "https://github.com/tadatuta/tst": {
         "master": {
-            "README.md": [
-                "README.ru.md",
-                "README.uk.md"
-            ]
+            "README.md": {
+                "sourceLang": "en",
+                "targets": [
+                    {
+                        "file": "README.ru.md",
+                        "lang": "ru"
+                    },
+                    {
+                        "file": "README.uk.md",
+                        "lang": "uk"
+                    }
+                ]
+            }
         }
     }
 }

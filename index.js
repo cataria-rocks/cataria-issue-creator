@@ -40,12 +40,14 @@ app
                     {
                         endpoint,
                         body: {
-                            title: 'Update document translation',
+                            title: 'Update document translations',
                             body: 'File ' + file + ' was changed. Please update:\n' +
-                                filesToWatch[file].map(function(url) {
-                                    return '* [' + url + '](http://cataria.rocks/?doc=' + repoUrl + '/blob/' + branchName + '/' + url + ')';
-                                }).join('\n');
-
+                                filesToWatch[file].targets.map(function(target) {
+                                    return '* [' + target.file + '](http://cataria.rocks/?target=' +
+                                        target.file + '&targetLang=' + target.lang +
+                                        '&sourceLang=' + filesToWatch[file].sourceLang +
+                                        '&doc=' + repoUrl + '/blob/' + branchName + '/' + file + ')';
+                                }).join('\n')
                         }
                     }).catch(console.error);
             });
