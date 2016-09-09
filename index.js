@@ -31,7 +31,7 @@ app
 
         data.commits.forEach(function(commit) {
             commit.modified.forEach(function(file) {
-                if (!filesToWatch.includes(file)) return;
+                if (!filesToWatch[file]) return;
 
                 console.log(file, 'was updated');
 
@@ -41,11 +41,12 @@ app
                         endpoint,
                         body: {
                             title: 'Update document translation',
-                            body: 'File ' + file + ' was changed.'
+                            body: 'File ' + file + ' was changed. Please update:\n' +
+                                filesToWatch[file].map(function(url) {
+                                    return '* [' + url + '](http://cataria.rocks/?doc=' + repoUrl + '/blob/' + branchName + '/' + url + ')';
+                                }).join('\n');
+
                         }
-                    }).then(response => {
-                        console.log(response.body.login);
-                        //=> 'sindresorhus'
                     }).catch(console.error);
             });
         });
