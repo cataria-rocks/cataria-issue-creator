@@ -1,4 +1,4 @@
-# cataria-issue-creater
+# cataria-issue-creator
 
 Service to automatically create issues for translaters when a doc on a source language was updated in github repo.
 
@@ -6,7 +6,7 @@ Service to automatically create issues for translaters when a doc on a source la
 
 ### Adding a new repo
 
-Create a webhook to send payloads to `cataria-issue-creater` for each push to a repo:
+Create a webhook to send payloads to `cataria-issue-creator` for each push to a repo:
 `https://github.com/:owner:/:repo:/settings/hooks`.
 
 ### Adding new documents
